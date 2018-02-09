@@ -4,7 +4,7 @@ public class Paddle {
     //paddle coordinates
     private int x, y;
     //paddle size
-    private final int WIDTH = 100, HEIGTH = 25;
+    private final int WIDTH = 100, HEIGTH = 15;
 
     public Paddle(){
         //original coordinates

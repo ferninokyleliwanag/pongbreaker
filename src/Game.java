@@ -9,6 +9,7 @@ public class Game extends JFrame {
         setVisible(true);
         setFocusable(true);
         setTitle("V.S. Two Pong Breaker");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         board = new Board();
         add(board);
         pack();
