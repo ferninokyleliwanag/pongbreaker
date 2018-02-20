@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Board extends JPanel {
     //edgespace to push play paddle up
     private final int EDGESPAGE = 50;
-    private final int BRICKNUMBER = 7;
+    private final int BRICKSROW = 3;
+    private final int BRICKSCOLUMN = 10;
     Paddle pPaddle;
     Paddle cPaddle;
     Ball ball;
@@ -29,13 +30,15 @@ public class Board extends JPanel {
         pPaddle.setPosition(getWidth()/2, getHeight()-EDGESPAGE);
         cPaddle.setPosition(getWidth()/2, EDGESPAGE);
         ball.setPosition(getWidth()/2, getHeight()/2);
-        //set bricks separately;
         int x = 0;
-        for(int i = 0; i <= BRICKNUMBER; i++){
-            for(int j= 0; j <= BRICKNUMBER; j++) {
-                addBrick(50 + x, getHeight()/2);
+        int y = 0;
+        for(int i = 0; i < BRICKSROW; i++){
+            for(int j = 0; j < BRICKSCOLUMN; j++ ){
+                addBrick(EDGESPAGE + x, 300 + y);
                 x += 100;
             }
+            x = 0;
+            y += 100;
         }
     }
 
@@ -46,12 +49,14 @@ public class Board extends JPanel {
         //set render color to white
         g.setColor(Color.WHITE);
         //paint objects if the game is playing
+        if(GAMESTATES.isPlay()) {
             pPaddle.paint(g);
             cPaddle.paint(g);
             ball.paint(g);
-            for(int i = 0; i<bricks.size(); i++){
+            for (int i = 0; i < bricks.size(); i++) {
                 bricks.get(i).paint(g);
             }
+        }
     }
 
     public void addBrick(int x, int y){
