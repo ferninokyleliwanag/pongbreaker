@@ -11,17 +11,18 @@ public class Ball {
 
     Board board;
 
-    public Ball(){
+    public Ball(Board board){
+        this.board = board;
         x = 0;
         y = 0;
     }
 
     public void move(){
         //ball bounce top and bottom
-        if(y+diameter > board.getHeight() || y < 0)
+        if( y+diameter > board.getHeight() || y < 0)
             dy *= -1;
         //ball bounce left and right
-        if(x + diameter > board.getWidth() - board.getEDGESPAGE()){
+        if(x + diameter > board.getWidth() || x < 0){
             dx *= -1;
         }
 
@@ -37,6 +38,18 @@ public class Ball {
 
     public void paint(Graphics g){
         g.fillOval(x, y, diameter, diameter);
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public int getDiameter(){
+        return diameter;
     }
 
 }

@@ -17,12 +17,12 @@ public class Board extends JPanel implements ActionListener{
     Timer timer;
 
 
-    public Board(){
+    public Board(Game game){
         setPreferredSize(new Dimension(1000,800));
         setBackground(Color.BLACK);
-        pPaddle = new Paddle();
-        cPaddle = new Paddle();
-        ball = new Ball();
+        pPaddle = new Paddle(this, game, ball);
+        cPaddle = new Paddle(this, game, ball);
+        ball = new Ball(this);
         brick = new Brick();
         bricks = new ArrayList<Brick>();
     }
@@ -33,6 +33,7 @@ public class Board extends JPanel implements ActionListener{
         pPaddle.setPosition(getWidth()/2, getHeight()-EDGESPAGE);
         cPaddle.setPosition(getWidth()/2, EDGESPAGE);
         ball.setPosition(getWidth()/2, getHeight()/2);
+        //for the bricks
         int x = 0;
         int y = 0;
         for(int i = 0; i < BRICKSROW; i++){
@@ -77,6 +78,8 @@ public class Board extends JPanel implements ActionListener{
 
     if(GAMESTATES.isPlay()){
         ball.move();
+        pPaddle.move();
+        cPaddle.moveAI();
     }
 
     repaint();

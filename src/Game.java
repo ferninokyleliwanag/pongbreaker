@@ -14,8 +14,9 @@ public class Game extends JFrame implements KeyListener{
         setFocusable(true);
         setTitle("V.S. Two Pong Breaker");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        board = new Board();
+        board = new Board(this);
         add(board);
+        addKeyListener(this);
         pack();
         setLocationRelativeTo(null);
         board.GameStart();
