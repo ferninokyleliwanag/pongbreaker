@@ -4,7 +4,7 @@ public class Paddle {
     //paddle coordinates
     private int x, y;
     //paddle size
-    private final int WIDTH = 100, HEIGTH = 15;
+    private final int WIDTH = 100, HEIGHT = 15;
     Board board;
     Ball ball;
     Game game;
@@ -38,17 +38,17 @@ public class Paddle {
     public void setPosition(int x, int y){
         //position is set relative to middle of paddle
         this.x = x - WIDTH/2;
-        this.y = y - HEIGTH/2;
+        this.y = y - HEIGHT /2;
     }
 
     //paint paddle
     public void paint(Graphics g){
-        g.fillRect(x, y, WIDTH, HEIGTH);
+        g.fillRect(x, y, WIDTH, HEIGHT);
     }
 
     //AI MOVEMENT
     public void moveAI(){
-        if(ball.getX() + ball.getDiameter() > board.getHeight()/2){
+        if(ball != null && ball.getX() + ball.getDiameter() > board.getHeight()/2){
             if(ball.getY() > WIDTH/2){
                 x += 3;
             }
@@ -58,7 +58,29 @@ public class Paddle {
         }
     }
 
+    //x position of paddle
+    public int getXPosition() {
+        return x;
+    }
 
+    //y position of paddle
+    public int getYPosition() {
+        return y;
+    }
+
+    //width of paddle
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    //height of paddle
+    public int getHeight() {
+        return HEIGHT;
+    }
+
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
 
 
 }

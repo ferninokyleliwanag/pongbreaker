@@ -34,27 +34,34 @@ public class Game extends JFrame implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e){
 
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            GAMESTATES.startPlay();
-            GAMESTATES.stopMenu();
+        if(GAMESTATES.isMenu()) {
+            if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                GAMESTATES.startPlay();
+                GAMESTATES.stopMenu();
+            }
+            if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                System.exit(0);
+            }
         }
-        if(e.getKeyCode() == KeyEvent.VK_P){
-            GAMESTATES.togglePause();
-            GAMESTATES.togglePlay();
+        if(GAMESTATES.isEnd()) {
+            if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                System.exit(0);
+            }
         }
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-            GAMESTATES.stopPlay();
-            GAMESTATES.stopPause();
-            GAMESTATES.startMenu();
-            //board.gameRestart();
+        if (GAMESTATES.isPlay() || GAMESTATES.isPause()) {
+            if(e.getKeyCode() == KeyEvent.VK_P){
+                GAMESTATES.togglePause();
+                GAMESTATES.togglePlay();
+            }
         }
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            leftPressed = true;
+        if(GAMESTATES.isPlay()) {
+            if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                leftPressed = true;
+            }
+            if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                rightPressed = true;
+            }
         }
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            rightPressed = true;
-        }
-
 
     }
 

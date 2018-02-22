@@ -17,15 +17,41 @@ public class Ball {
         y = 0;
     }
 
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, diameter, diameter);
+    }
+
     public void move(){
-        //ball bounce top and bottom
-        if( y+diameter > board.getHeight() || y < 0)
-            dy *= -1;
+        int newX = x + diameter;
+        int newY = y + diameter;
+        if(y < 0) {
+            board.playerScore++;
+            board.resetBoard();
+        }
+        if(y > board.getHeight()) {
+            board.computerScore++;
+            board.resetBoard();
+        }
         //ball bounce left and right
-        if(x + diameter > board.getWidth() || x < 0){
+        if(newX > board.getWidth() || x < 0){
             dx *= -1;
         }
-
+        //bounce off of ppaddle
+        if(getRectangle().intersects(board.pPaddle.getRectangle())) {
+            dy *= -1;
+        }
+        //bounce off of cpaddle
+        if (getRectangle().intersects(board.cPaddle.getRectangle())) {
+            dy *= -1;
+        }
+        for(int i = 0; i < board.bricks.size(); i++) {
+           Brick brick = board.bricks.get(i);
+           if(getRectangle().intersects(brick.getRectangle())) {
+               board.bricks.remove(i);
+               dy *= -1;
+               break;
+           }
+        }
         x += dx;
         y += dy;
     }

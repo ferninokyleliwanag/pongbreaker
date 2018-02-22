@@ -21,14 +21,28 @@ public class Brick {
         this.y = y - HEIGHT/2;
     }
 
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
+
     public void paint(Graphics g){
         g.fillRect(x, y, WIDTH, HEIGHT);
     }
 
+    public int getX() {
+        return x;
+    }
 
+    public int getY() {
+        return y;
+    }
 
+    public int getWidth() {
+        return WIDTH;
+    }
 
-
-
+    public int getHeight() {
+        return HEIGHT;
+    }
 
 }
