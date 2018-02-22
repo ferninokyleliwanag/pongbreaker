@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements ActionListener{
     //edgespace to push play paddle up
     private final int EDGESPAGE = 50;
     private final int BRICKSROW = 3;
@@ -12,6 +14,7 @@ public class Board extends JPanel {
     Ball ball;
     Brick brick;
     ArrayList<Brick> bricks;
+    Timer timer;
 
 
     public Board(){
@@ -40,6 +43,8 @@ public class Board extends JPanel {
             x = 0;
             y += 100;
         }
+        timer = new Timer(1000/60, this);
+        timer.start();
     }
 
     @Override
@@ -66,8 +71,20 @@ public class Board extends JPanel {
     }
 
 
+    //game updating and rendering
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
+    if(GAMESTATES.isPlay()){
+        ball.move();
+    }
 
+    repaint();
 
+    }
+
+    public int getEDGESPAGE(){
+        return EDGESPAGE;
+    }
 
 }
