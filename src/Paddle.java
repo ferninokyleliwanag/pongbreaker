@@ -48,12 +48,14 @@ public class Paddle {
 
     //AI MOVEMENT
     public void moveAI(){
-        if(ball != null && ball.getX() + ball.getDiameter() > board.getHeight()/2){
-            if(ball.getY() > WIDTH/2){
-                x += 3;
+        if(board.ball != null && board.ball.getY() < board.getHeight()/2){
+            if(board.ball.getX() > x){
+                if(x + 5 + WIDTH < board.getWidth())
+                    x += 4;
             }
-            if(ball.getY() < WIDTH/2){
-                x -= 3;
+            if(board.ball.getX() < x){
+                if(x - 5 > 0)
+                    x -= 4;
             }
         }
     }

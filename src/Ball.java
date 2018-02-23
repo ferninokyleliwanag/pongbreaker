@@ -4,7 +4,7 @@ public class Ball {
 
     final int diameter = 35;
     int x, y;
-    final int SPEED = 3;
+    final int SPEED = 5;
     double dx = SPEED, dy = SPEED;
 
     double MAXANGLE = 5*Math.PI/12;

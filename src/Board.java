@@ -52,7 +52,7 @@ public class Board extends JPanel implements ActionListener{
         //set render color to white
         g.setColor(Color.WHITE);
         //end game when someone gets score
-        if(computerScore >= 1 || playerScore >= 1) {
+        if(computerScore >= 3 || playerScore >= 3) {
             GAMESTATES.endGame();
             GAMESTATES.stopMenu();
             GAMESTATES.stopPause();
@@ -67,29 +67,29 @@ public class Board extends JPanel implements ActionListener{
                 bricks.get(i).paint(g);
             }
             //paint score
-            g.drawString("Computer: " + computerScore, 50, 50);
-            g.drawString("Player: " + playerScore, 50, 700);
+            printSimpleString("Computer: " + computerScore, WIDTH, 50, 50, g);
+            printSimpleString("Player: " + playerScore, WIDTH, 50, 700, g);
         }
         if(GAMESTATES.isPause()) {
             g.setFont(new Font("Comic Sans Ms", Font.BOLD, 30));
-            g.drawString("Game Paused", getWidth()/2 - 105, getHeight()/2 - 15);
-            g.drawString("Press P", getWidth()/2 - 60, getHeight()/2 + 15);
+            printSimpleString("Game Paused", WIDTH, getWidth()/2, getHeight()/2, g);
+            printSimpleString("Press P", WIDTH, getWidth()/2, getHeight()/2 + 30, g);
         }
         if(GAMESTATES.isEnd()) {
             g.setFont(new Font("Comic Sans Ms", Font.BOLD, 30));
-            g.drawString("Game Over", getWidth()/2 - 105, getHeight()/2 - 15);
+            printSimpleString("Game Over", WIDTH, getWidth()/2, getHeight()/2 - 15, g);
             String winner = "Player";
             if(computerScore > playerScore) {
                 winner = "Computer";
             }
-            g.drawString(winner + " wins", getWidth()/2 - 105, getHeight()/2 + 15);
-            g.drawString("ESC to Exit", getWidth()/2 - 105, getHeight()/2 + 50);
+            printSimpleString(winner + " wins", WIDTH, getWidth()/2, getHeight()/2 + 15, g);
+            printSimpleString("ESC to Exit", WIDTH, getWidth()/2, getHeight()/2 + 50, g);
         }
         if(GAMESTATES.isMenu()) {
             g.setFont(new Font("Comic Sans Ms", Font.BOLD, 60));
-            g.drawString("V.S. Two Pong Breaker", getWidth()/7, getHeight()/2-50);
+            printSimpleString("V.S. Two Pong Breaker", WIDTH, getWidth()/2, getHeight()/2-50, g);
             g.setFont(new Font("Comic Sans Ms", Font.BOLD, 30));
-            g.drawString("Press Space", getWidth()/2 - 105, getHeight()/2+50);
+            printSimpleString("Press Space", WIDTH, getWidth()/2, getHeight()/2+50, g);
         }
     }
 
@@ -130,6 +130,16 @@ public class Board extends JPanel implements ActionListener{
 
     public int getEDGESPAGE(){
         return EDGESPAGE;
+    }
+
+    private void printSimpleString(String s, int width, int XPos, int YPos, Graphics g2d){
+        //returns the LENGTH of the STRING parameter to the variable stringLen
+        int stringLen = (int)g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();
+        //determines the center of the WIDTH parameter and subtracts the center of the length
+        //to determine the X value to start the string
+        int start = width/2 - stringLen/2;
+        //prints s at the desired X position with adjustment and the desired y.
+        g2d.drawString(s, start + XPos, YPos);
     }
 
 }
