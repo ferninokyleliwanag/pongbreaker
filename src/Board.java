@@ -9,6 +9,7 @@ public class Board extends JPanel implements ActionListener{
     private final int EDGESPAGE = 50;
     private final int BRICKSROW = 3;
     private final int BRICKSCOLUMN = 10;
+    private final int PUSHBALL = 30;
     int playerScore = 0;
     int computerScore = 0;
     Paddle pPaddle;
@@ -32,7 +33,7 @@ public class Board extends JPanel implements ActionListener{
         //original rendering of graphics
         pPaddle.setPosition(getWidth()/2, getHeight()-EDGESPAGE);
         cPaddle.setPosition(getWidth()/2, EDGESPAGE);
-        ball.setPosition(getWidth()/2, getHeight()/2);
+        ball.setPosition(getWidth()/2, getHeight() - EDGESPAGE - PUSHBALL);
         loadBricks();
         timer = new Timer(1000/60, this);
         playerScore = 0;
@@ -41,7 +42,8 @@ public class Board extends JPanel implements ActionListener{
     }
 
     public void resetBoard() {
-        ball.setPosition(getWidth()/2, getHeight()/2);
+        ball.setPosition(getWidth()/2, getHeight() -EDGESPAGE - PUSHBALL);
+        pPaddle.setPosition(getWidth()/2, getHeight()-EDGESPAGE);
         loadBricks();
     }
 
@@ -83,7 +85,6 @@ public class Board extends JPanel implements ActionListener{
                 winner = "Computer";
             }
             printSimpleString(winner + " wins", WIDTH, getWidth()/2, getHeight()/2 + 15, g);
-            printSimpleString("ESC to Exit", WIDTH, getWidth()/2, getHeight()/2 + 50, g);
         }
         if(GAMESTATES.isMenu()) {
             g.setFont(new Font("Comic Sans Ms", Font.BOLD, 60));

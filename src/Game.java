@@ -39,13 +39,11 @@ public class Game extends JFrame implements KeyListener{
                 GAMESTATES.startPlay();
                 GAMESTATES.stopMenu();
             }
-            if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                System.exit(0);
-            }
+
         }
         if(GAMESTATES.isEnd()) {
             if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                System.exit(0);
+
             }
         }
         if (GAMESTATES.isPlay() || GAMESTATES.isPause()) {

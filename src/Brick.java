@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Brick {
-    private int brickLife = 3;
     private int x, y;
     private final int WIDTH = 50, HEIGHT = 15;
 

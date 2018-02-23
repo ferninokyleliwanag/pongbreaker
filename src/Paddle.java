@@ -51,11 +51,11 @@ public class Paddle {
         if(board.ball != null && board.ball.getY() < board.getHeight()/2){
             if(board.ball.getX() > x){
                 if(x + 5 + WIDTH < board.getWidth())
-                    x += 4;
+                    x += 6;
             }
             if(board.ball.getX() < x){
                 if(x - 5 > 0)
-                    x -= 4;
+                    x -= 6;
             }
         }
     }
