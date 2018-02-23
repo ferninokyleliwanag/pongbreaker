@@ -45,12 +45,11 @@ public class Ball {
             dy *= -1;
         }
         for(int i = 0; i < board.bricks.size(); i++) {
-           Brick brick = board.bricks.get(i);
-           if(getRectangle().intersects(brick.getRectangle())) {
-               board.bricks.remove(i);
-               dy *= -1;
-               break;
-           }
+            Brick brick = board.bricks.get(i);
+            if (brick != null && getRectangle().intersects(brick.getRectangle())) {
+                board.bricks.remove(i);
+                dy *= -1;
+            }
         }
         x += dx;
         y += dy;
